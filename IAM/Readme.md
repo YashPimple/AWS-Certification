@@ -4,19 +4,59 @@ IAM is a global service (Not scoped per region). Mainly two services can allow a
 
 Following terms are used in context of IAM:
 
-- User : can be an IAM user or an applications accessing the AWS resources
-- Group :Group of users who can be collectively permitted some actions
-- Role : This is something which can be assumed by an entity like User or Group (This is similar to Authentication)
-- Policy : This defines the permissions you have on the resources that you want to access (This is similar to Authorization)
+## Users & Groups:
+- Groups are collections of users and have policies attached to them
+- Groups cannot be nested
+- User can belong to multiple groups
+- User doesn't have to belong to a group
+- Root User has full access to the account
+- IAM User has limited permission to the account
+- You should log in as an IAM user with admin access even if you have root access. This is just to be sure that nothing goes wrong by accident.
 
-Policies can be managed in two ways:
-1. Managed policies : AWS Managed & Customer Managed
-2. Inline Policies
+## Policies
+Policies are JSON documents that outline permissions for users, groups or roles
+Two types
+1. **User based policies**:
+IAM policies define which API calls should be allowed for a specific user
+2. **Resource based policies**:
+Control access to an AWS resource
+Grant the specified principal permission to perform actions on the resource and define under what conditions this applies
+An IAM principal can access a resource if the user policy ALLOWS it OR the resource policy ALLOWS it AND there’s no explicit DENY.
+Policies assigned to a user are called inline policies
+Follow least privilege principle for IAM Policies
+- Policy Structure:
+  ![policy-struct](https://github.com/YashPimple/AWS-Certification/assets/97302447/9479ba9c-6149-4a72-b28c-f72f69c61988)
 
-Policies can further be of two types:
+## Roles 
+Collection of policies for AWS services
+> If you are going to use an IAM Service Role with Amazon EC2 or another AWS service that uses Amazon EC2, you must store the role in an instance profile. When you create an IAM service role for EC2, the role automatically has EC2 identified as a trusted entity.
 
-i) Identity based policies : These are attached directly to Identities like User/Groups etc. They can be managed or inline policies.
+## Protect IAM Accounts
+1. Password Policy:
+- Used to enforce standards for password
+   - password rotation
+   - password reuse
+- Prevents brute force attack
+2. Multi Factor Authentication (MFA):
+- Both root user and IAM users should use MFA
 
-ii) Resource based policies : These are inline policies directly applied on the resource that has to be accessed from same/other accounts. This is mainly used for cross-account resource access
-Policy versioning: Customer managed policies can normally have only 5 versions being managed at a single point of time. This is useful when you make a change to a policy and it breaks something, you can quickly set the default setting to a previously used policy
-IAM Roles are more preferred instead of resource based policies which are not extendable to other entities
+## IAM Security Tools
+1. IAM Credentials Report
+- lists all the users and the status of their credentials (MFA, password rotation, etc.)
+- account level - used to audit security for all the users
+2. IAM Access Advisor
+- shows the service permissions granted to a user and when those services were last accessed
+user-level
+- used to revise policies for a specific user
+
+## IAM Guidelines & Best Practices
+- Don't use the root account except for AWS account setup
+- One physical user = One AWS user
+- Assign users to groups and assign permissions to groups
+- Create a strong password policy
+- Use and enforce the use of Multi Factor Authentication (MA)
+- Create and use Roles for giving permissions to AWS services
+- Use Access Keys for Programmatic Access (CLI / SDK)
+- Audit permissions of your account using AM Credentials Report & IAM
+Access Advisor
+- Never share your IAM user and its Access Key
