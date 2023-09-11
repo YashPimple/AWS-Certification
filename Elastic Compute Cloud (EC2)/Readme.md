@@ -1,0 +1,5 @@
+- Regional Service
+- EC2 (Elastic Compute Cloud) is an Infrastructure as a Service (IaaS)
+- Stopping & Starting an instance may change its public IP but not its private IP
+- AWS Compute Optimizer recommends optimal AWS Compute resources for your workloads
+- There is a vCPU-based On-Demand Instance soft limit per region
