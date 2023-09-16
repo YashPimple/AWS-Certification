@@ -90,4 +90,18 @@ the pool with the lowest price (best choice for most workloads)
 - EC2 Instance Store lose their storage if they're stopped (ephemeral)
 - Good for buffer / cache / scratch data / temporary content
 - Risk of data loss if hardware fails
-- Backups and Replication are your responsibility 
+- Backups and Replication are your responsibility
+
+## EBS Volume Types
+ EBS Volumes come in 6 types
+1. gp2. / gp3 (SSD): General purpose SSD volume that balances price and performance for
+a wide variety of workloads
+2. iol / io2 (SSD): Highest-performance SSD volume for mission-critical low-latency or
+high-throughput workloads
+3. stI (HDD): Low cost HDD volume designed for frequently accessed, throughput-
+intensive workloads
+4. scI (HDD): Lowest cost HDD volume designed for less frequently accessed workloads
+   
+- EBS Volumes are characterized in Size | Throughput | |OPS (I/O Ops Per Sec)
+- When in doubt always consult the AWS documentation - it's good!
+- Only gp2/gp3 and **ol/io2** can be used as **boot volumes**
