@@ -120,3 +120,15 @@ Optional
 - Up to 16 Read Replicas per secondary region
 - Helps for decreasing latency for clients in other geographical locations
 - RTO of less than 1 minute (to promote another region as primary)
+
+### Aurora Database Cloning
+• Create a new Aurora DB Cluster from an existing one
+• Faster than snapshot & restore
+• Uses copy-on-write protocol
+• Initially, the new DB cluster uses the same data volume as the original DB cluster (fast and efficient
+- no copying is needed)
+• When updates are made to the new DB cluster data, then additional storage is allocated and data is
+copied to be separated
+• Very fast & cost-effective
+• Useful to create a "staging" database from a "production" database without impacting the
+production database
