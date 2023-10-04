@@ -41,3 +41,67 @@ Advantage over wine RDS versus deploying DR on FC
 PostgreSQL, SQL Server, Oracle)
 
 ### RDS - Read Replicas vs Multi AZ
+
+### RDS Custom
+• Managed Oracle and Microsoft SQL Server Database with OS and
+database customization
+• RDS: Automates setup, operation, and scaling of database in AWS
+• Custom: access to the underlying database and OS so you can
+• Configure settings
+• Install patches
+• Enable native features
+• Access the underlying EC2 Instance using SSH or SSM Session Manager
+• De-activate Automation Mode to perform your customization,
+better to take a DB snapshot before
+
+#### RDS vs. RDS Custom
+• RDS: entire database and the OS to be managed by AWS
+• RDS Custom: full admin access to the underlying OS and the data
+
+### Amazon Aurora
+- Regional Service (supports global databases)
+- Supports Multi AZ
+- AWS managed Relational DB cluster
+- Preferred over Relational Database Service (RDS)
+- Auto-scaling (max 128TB)
+- Up to 15 read replicas
+- Asynchronous Replication (milliseconds)
+- Supports only MySQL & PostgreSQL
+- Cloud-optimized (5x performance improvement over MySQL on RDS, over 3x the performance of PostgreSQL on RDS)
+- Backtrack: restore data at any point of time without taking backups
+
+### Aurora High Avalibility and Scalability
+• 6 copies of your data across 3 AZ:
+• 4 copies out of 6 needed for writes
+• 3 copies out of 6 needed for reads
+• Self-healing with peer-to-peer replication
+• Storage is striped across 100s of volumes
+• One Aurora Instance takes writes (master)
+• Automated failover for master in less than 30 seconds
+• Master + up to 15 Aurora Read Replicas serve reads
+• Support for Cross Region Replication
+
+### Aurora RDS Cluster
+#### Endpoints
+- Writer Endpoint (Cluster Endpoint)
+  - Always points to the master (can be used for read/write)
+  - Each Aurora DB cluster has one cluster endpoint
+  - If master RDS gets failover then still client will be able to talk with **Writer Endpoint**
+- Reader Endpoint
+  - Provides load-balancing for read replicas only (used to read only)
+  - If the cluster has no read replica, it points to master (can be used to read/write)
+  - Each Aurora DB cluster has one reader endpoint
+- Custom Endpoint:
+  - Used to point to a subset of replicas
+  - Provides load-balanced based on criteria other than the read-only or read-write capability of the DB instances like instance class (ex, direct internal users to low-capacity instances and direct production traffic to high-capacity instances)
+ 
+### Features of Aurora
+• Automatic fail-over
+• Backup and Recovery
+• Isolation and security
+• Industry compliance
+• Push-button scaling
+• Automated Patching with Zero Downtime
+• Advanced Monitoring
+• Routine Maintenance
+• Backtrack: restore data at any point of time without using backups
