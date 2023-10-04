@@ -1,6 +1,9 @@
 ## Scalability & High Availability
 
+## AutoScaling Groups
 
 ## LoadBalancer 
-
-## AutoScaling Groups
+- ELB
+   - Cross Zone LoadBalancing
+- ALB
+- GLB
