@@ -105,3 +105,18 @@ better to take a DB snapshot before
 • Advanced Monitoring
 • Routine Maintenance
 • Backtrack: restore data at any point of time without using backups
+
+### Aurora Multi-Master
+Optional
+- Every node (replica) in the cluster can read and write
+- Used for immediate failover for write node (high availability in terms of write). If disabled and the master node fails, need t00 promote a Read Replica as the new master (will take some time).
+- Client needs to have multiple DB connections for failover
+
+### Aurora Global Database
+- Entire database is replicated across regions to recover from region failure
+- Designed for globally distributed applications with low latency local reads in each region
+- 1 Primary Region (read / write)
+- Up to 5 secondary (read-only) regions (replication lag < 1 second)
+- Up to 16 Read Replicas per secondary region
+- Helps for decreasing latency for clients in other geographical locations
+- RTO of less than 1 minute (to promote another region as primary)
